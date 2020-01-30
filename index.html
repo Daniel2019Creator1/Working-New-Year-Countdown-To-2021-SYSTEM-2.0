@@ -228,6 +228,7 @@ function countDown(){
     var currentTime = today.getTime();
     var eventTime = eventDate.getTime();
     var remTime = eventTime - currentTime;
+        var milaseconds = Math.floor(remTime/10000);
     var seconds = Math.floor(remTime/1000);
     var minuts = Math.floor(seconds/60); 
     var hours = Math.floor(minuts/60);
@@ -236,12 +237,14 @@ function countDown(){
     hours = hours % 24;
     minuts%=60; 
     seconds%=60; 
+     milaseconds%=60;
     hours = (hours < 10) ? "0"+hours : hours;
     minuts = (minuts < 10) ? "0"+minuts : minuts;
      seconds = (seconds < 10) ? "0"+seconds : seconds;  
+         milaseconds = (milaseconds < 10) ? "0"+milaseconds : milaseconds; 
     document.getElementById("days").innerHTML = days; 
      document.getElementById("hours").innerHTML = hours; 
-     
+     document.getElementById("milaseconds").innerHTML = milaseconds; 
 document.getElementById("seconds").innerHTML = seconds; 
 document.getElementById("minuts").innerHTML = minuts;
     setTimeout(countDown,1000);
@@ -259,6 +262,7 @@ document.getElementById("minuts").innerHTML = minuts;
           var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
           var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          var milaseconds = Math.floor((distance % (10000 * 600)) / 10000);
           if ( days < 10 ) {
               hours = "0"+hours;
           }
@@ -271,7 +275,10 @@ document.getElementById("minuts").innerHTML = minuts;
           if ( seconds < 10 ) {
               seconds = "0"+seconds;
           }
-          document.getElementById("demo").innerHTML = "<div>"+ days + "</div> : <div>"+ hours + "</div> : " + "<div>"+ minutes + "</div> : " + "<div>"+seconds + "</div>";
+          if ( milaseconds < 10 ) {
+              milaseconds = "0"+milaseconds;
+          }
+          document.getElementById("demo").innerHTML = "<div>"+ days + "</div> : <div>"+ hours + "</div> : " + "<div>"+ minutes + "</div> : " + "<div>"+seconds + "</div> : " + "<div>"+milaseconds + "</div>";
         
           if (distance < 0) {
             clearInterval(x);
